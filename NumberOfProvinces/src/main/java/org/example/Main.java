@@ -1,7 +1,6 @@
 package org.example;
 
 public class Main {
-
   static class Solution {
     public int findCircleNum(int[][] isConnected) {
       int count = 0;
@@ -19,6 +18,7 @@ public class Main {
       return count;
     }
     public void startExecution(int[][] isConnected, int j){
+      if(isConnected[j][j] == -1) return;
       isConnected[j][j] = -1;
       int i = j;
       ++j;
@@ -27,11 +27,18 @@ public class Main {
           startExecution(isConnected, j);
         }
       }
+      for(j = i-1; j != -1; --j){
+        if(isConnected[i][j] == 1){
+          startExecution(isConnected, j);
+        }
+      }
     }
   }
 
   public static void main(String[] args) {
-
+    int[][] isConnected = {{1,2},{3,2}};
+    Solution s = new Solution();
+    s.findCircleNum(isConnected);
   }
 
 }
